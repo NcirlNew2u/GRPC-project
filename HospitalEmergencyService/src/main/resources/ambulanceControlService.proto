@@ -1,0 +1,43 @@
+syntax="proto3";
+
+option java_package = "grpc.ambulanceControlService";
+option java_outer_classname = "ambulanceControlServiceImpl";
+option java_multiple_files= true;
+package AmbulanceControlService;
+
+
+	service ambulanceControlService{
+/*Server Streaming RPCs where the client sends a request to the server and gets a stream to read a
+sequence of messages back. The client reads from the returned stream until there is no more
+messages.*/
+
+  rpc emergencyAmbulance(AmbulanceRequest) returns (stream AmbulanceResponse ) {}
+
+/*bidirectional Streaming RPCs where both sides send a sequence of messages using read-write
+stream
+ */
+  rpc ambulanceStatus(stream sendRequest) returns (stream SendResponse ) {}
+
+}
+
+message AmbulanceRequest {
+	int32 numbers = 1;//ph no.
+	string name = 2;//name
+	string address = 3;//address
+}
+
+
+message AmbulanceResponse {
+	string message = 1;//ambulance send
+}
+
+message sendRequest {
+	int32 ambulancenumber = 1; //ambulance no.
+	string fromBase = 2;//accident,injury
+	string toBase = 3;//sick, health issues
+}
+
+message SendResponse {
+	string finalMessage  = 1; //status
+	int32 ambulanceNumber = 2;//ambulance no.
+}

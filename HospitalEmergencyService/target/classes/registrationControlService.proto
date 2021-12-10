@@ -1,0 +1,36 @@
+syntax="proto3";
+
+option java_package = "grpc.registrationControlService";
+option java_outer_classname = "registrationControlServiceImpl";
+option java_multiple_files= true;
+package RegistrationControlService;
+
+
+service registrationControlService{
+
+	//unary
+	rpc GetHospitalHelp (HospitalHelpRequest) returns (HospitalHelpResponce){}
+
+	//client streaming
+	rpc SendStringClientStreaming(stream sendRegistrationRequest) returns (sendResgistrationResponce){}
+
+}
+
+message HospitalHelpRequest{
+	string hospitalHelp=1;
+
+}
+
+message HospitalHelpResponce{
+	string hospitalHelp=1;
+}
+
+
+message sendRegistrationRequest{
+	string firstString=1;
+
+}
+
+message sendResgistrationResponce{
+	string firstString=1;
+}
